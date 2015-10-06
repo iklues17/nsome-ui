@@ -1,0 +1,47 @@
+<div class="panel">
+	<div class="row">
+		<div class="small-12 columns">
+			<span class="label">Members</span>
+			<ul class="button-group radius right">
+				<li><div role="button" id="btnAddMember"
+					class="button tiny">
+					Add</div></li>
+				<li><div role="button" id="btnModMember"
+					class="button tiny secondary">Modify</div></li>
+				<li><div role="button" id="btnDelMember"
+					class="button tiny secondary">Delete</div></li>
+			</ul>
+		</div>
+	</div>
+	<div class="row" style="max-height: 500px;overflow: hidden;position: relative;">
+		<div class="small-12 columns" style="margin-bottom: 20px;overflow: auto;height: 301px;">
+			<table class="display" id="gridMembers" style="width:100%">
+			    <thead>
+			    <tr><td>Total</td><td data-obj="expItemsTot">{{totalPayment}}</td></tr>
+			    <tr>
+			        {{#each tableheaders}}
+			        {{#table-head}}{{/table-head}}
+			        {{/each}}
+			    </tr>
+			    </thead>
+			    <tbody>
+			    {{#each tabledatas}}
+			    <tr data-obj="member" id="{{id}}">
+			        <td data-obj="memberName">{{name}}</td>
+			        <td data-obj="payment" data-role="cash">{{payment}}</td>
+			    </tr>
+			    {{/each}}
+			    </tbody>
+			</table>
+		</div>
+	</div>
+	<div class="row">
+		<div class="small-12 columns">
+			<ul class="button-group radius right">
+				<li><div role="button inrow" id="btnTripMembersSave"
+					class="button small right">
+					Save</div></li>
+			</ul>
+		</div>
+	</div>
+</div>

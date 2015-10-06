@@ -1,0 +1,47 @@
+<meta charset="utf-8">
+<div class="panel">
+	<div class="row">
+		<div class="small-12 columns">
+			<span class="label">Jungsan King Metrix</span>
+			<ul class="button-group radius right">
+				<li><div role="button" id="btnReset"
+					class="button tiny secondary">Reset</div></li>
+				<li><div role="button" id="btnClear"
+					class="button tiny secondary">Clear</div></li>
+			</ul>
+		</div>
+	</div>
+	<div class="row">
+		<div class="large-12 columns" id="divMemberItemMap">
+			<span id="isExistedMetrix">Please Make Jungsan Metrix</span>
+			<table id="gridJskMetrix">
+				<thead>
+					<tr>
+						<th rowspan=2 style="width:10%">Item</th>
+						<td rowspan=2 style="width:10%">Cost</td>
+						{{#each this}}
+						<td id="{{memberId}}" data-obj="memberName" colspan=3 style="width:10%">{{memberName}}</td>
+						<td data-obj="payment" style="display:none;">{{payment}}</td>
+						{{/each}}
+					</tr>
+					<tr>
+						{{#each this}}
+						<td style="padding:8px 5px 8px 5px">여부</td><td style="padding:8px 5px 8px 5px" colspan=2>직접입력</td>
+						{{/each}}
+					</tr>
+				</thead>
+				<tbody>
+				</tbody>
+			</table>
+		</div>
+	</div>
+	<div class="row">
+		<div class="large-12 columns">
+			<ul class="button-group radius right">
+				<li><div role="button inrow" id="btnMetrixSave"
+					class="button small">
+					Save</div></li>
+			</ul>
+		</div>
+	</div>
+</div>

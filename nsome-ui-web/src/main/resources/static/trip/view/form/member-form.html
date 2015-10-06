@@ -1,0 +1,49 @@
+<div class="row">
+	<div class="small-12 columns">
+		 <form id="formMember">
+			<div class="row entry-row">
+				<fieldset>
+					<legend>Member</legend>
+					<label>Id
+						<input name="id" type="text" placeholder="Inputs member's id..." />
+					</label>
+					<label>Name
+						<input name="name" type="text" placeholder="Inputs member's name..." />
+					</label>
+					<label>Payment
+						<input name="payment" type="text" placeholder="Inputs member's payment..." />
+					</label>
+				</fieldset>
+			</div>
+		</form>
+	</div>
+</div>
+<script>
+	$('#formMember [name="payment"]').on('input', function(e){
+		var value = $(this).val();
+		value = comm.removeComma(value);
+		if (isNaN(value) || value == "") {    // 숫자 형태의 값이 정상적으로 입력되었는지 확인합니다.
+			value = value.substring(0,value.length-1);
+		}
+		$(this).val(comm.addComma(value));
+	});
+	
+	var modalFnInit = function(viewmode, data){
+		if(viewmode === "ADD"){
+			
+		}else{
+			$('#formMember [name="id"]').parent().hide();
+			$('#formMember [name="id"]').val(data[0]);
+			$('#formMember [name="name"]').val(data[1]);
+			$('#formMember [name="payment"]').val(data[2]);
+		}
+	};
+	
+	var modalFnGetData = function(){
+		return {
+			id: $('#formMember [name="id"]').val(),
+			name: $('#formMember [name="name"]').val(),
+			payment: $('#formMember [name="payment"]').val()
+		};
+	}
+</script>

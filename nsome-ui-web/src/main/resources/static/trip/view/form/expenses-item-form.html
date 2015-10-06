@@ -1,0 +1,49 @@
+<div class="row">
+	<div class="small-12 columns">
+		 <form id="formExpItem">
+			<div class="row entry-row">
+				<fieldset>
+					<legend>Expenses Item</legend>
+					<label>Item English Name
+						<input name="id" type="text" placeholder="Inputs your name..." />
+					</label>
+					<label>Item Name
+						<input name="name" type="text" placeholder="Inputs your name..." />
+					</label>
+					<label>Cost
+						<input name="cost" type="text" placeholder="Inputs your name..." />
+					</label>
+				</fieldset>
+			</div>
+		</form>
+	</div>
+</div>
+<script>
+	$('#formExpItem [name="cost"]').on('input', function(e){
+		var value = $(this).val();
+		value = comm.removeComma(value);
+		if (isNaN(value) || value == "") {    // 숫자 형태의 값이 정상적으로 입력되었는지 확인합니다.
+			value = value.substring(0,value.length-1);
+		}
+		$(this).val(comm.addComma(value));
+	});
+	
+	var modalFnInit = function(viewmode, data){
+		if(viewmode === "ADD"){
+			
+		}else{
+			$('#formExpItem [name="id"]').parent().hide();
+			$('#formExpItem [name="id"]').val(data[0]);
+			$('#formExpItem [name="name"]').val(data[1]);
+			$('#formExpItem [name="cost"]').val(data[2]);
+		}
+	};
+	
+	var modalFnGetData = function(){
+		return {
+			id: $('#formExpItem [name="id"]').val(),
+			name: $('#formExpItem [name="name"]').val(),
+			payment: $('#formExpItem [name="cost"]').val()
+		};
+	}
+</script>
