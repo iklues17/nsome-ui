@@ -212,6 +212,8 @@ comm.initPage = function () {
     
     if (hash.startsWith('trips')) {
     	$(".top-bar-section > ul.left > li").eq(0).addClass('active');
+    }else if (hash.startsWith('crews')) {
+    	$(".top-bar-section > ul.left > li").eq(1).addClass('active');
     }
     
     // Top Right Bar - login state

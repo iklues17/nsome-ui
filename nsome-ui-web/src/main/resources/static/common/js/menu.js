@@ -18,7 +18,7 @@ page.MenuTop = (function () {
 	        className: "menu-top",
 	        id: "menuTop",
 	        position: "new",
-	        template: comm.getHtml("menu-top.html"),
+	        template: comm.getHtml("common/view/menu-top.html"),
 	        data: datas,
 	        reload: true,
 	        events: {

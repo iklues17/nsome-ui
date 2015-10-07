@@ -13,15 +13,13 @@
 						<table id="gridSummary" style='width:100%;'>
 							<thead>
 								<tr>
-									<th style="width:33%">ID</th>
-									<td style="width:33%">NAME</td>
-									<td style="width:33%">TOTAL AMOUNT</td>
+									<td>NAME</td>
+									<td>TOTAL AMOUNT</td>
 								</tr>
 							</thead>
 							<tbody>
 								{{#each totalAmounts}}
-								<tr>
-									<td>{{member.id}}</td>
+								<tr id="{{member.id}}" data-obj-name="{{member.name}}" data-obj-payment="{{member.payment}}" data-obj-totalAmount="{{totalAmount}}">
 									<td>{{member.name}}</td>
 									<td data-role="cash">{{totalAmount}}</td>
 								</tr>
@@ -42,29 +40,39 @@
 						<table id="gridBills" style='width:100%;'>
 							<thead>
 								<tr>
-									<th style="width:33%">NAME</th>
-									<th style="width:33%">ITEM</th>
-									<td style="width:33%">AMOUNT</td>
+									<td style="text-align:center;">이름</td>
+									<td data-obj="member-name" style="text-align:center;"></td>
+								</tr>
+								<tr>
+									<td style="text-align:center;">낸돈</td>
+									<td data-obj="member-payment" style="text-align:center;"></td>
+								</tr>
+								<tr>
+									<td style="text-align:center;">낼돈</td>
+									<td data-obj="member-totalAmount" style="text-align:center;"></td>
+								</tr>
+								<tr>
+									<td colspan=2 style="text-align:center;">상세내역</td>
 								</tr>
 							</thead>
 							<tbody>
 								{{#each metrix}}
 								{{#each mappingMembers}}
-								<tr data-obj-member="{{member.id}}">
-									<td>{{member.name}}</td>
-									<td>{{../item.name}}</td>
-									<td  data-role="cash">{{amount}}</td>
+								<tr data-obj-member="{{member.id}}" style="background-color:white;">
+									<th>{{../item.name}}</th>
+									<td data-role="cash">{{amount}}</td>
 								</tr>
 								{{/each}}
 								{{/each}}
+							</tbody>
+							<tfoot>
 								{{#each totalAmounts}}
 								<tr data-obj-member="{{member.id}}">
-									<td>{{member.name}}</td>
 									<td>Total</td>
 									<td data-role="cash">{{totalAmount}}</td>
 								</tr>
 								{{/each}}
-							</tbody>
+							</tfoot>
 						</table>
 					</div>
 				</div>

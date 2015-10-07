@@ -24,21 +24,60 @@ page.Trips = (function(){
 	
 	var tripsView = {
 		init : function(){
+			this.displayView();
+		},
+		
+		displayView : function(){
+			var _that = this;
+
+			template.RenderOne({
+		        target: "#body",
+		        tagName: "div",
+		        className: "trip-detail",
+		        id: "bodyTripDetail",
+		        position: "new",
+		        template: comm.getHtml("trip/view/trips-template.html"),
+		        data: {},
+		        events: {
+		        },
+	
+		        afterRender: function() { 
+//		        	tripsView.init();
+		        }
+		    });
 			
-		}
+		},
 	};
 	
 	var tripDetailView = {
 		init : function(tripId){
-			
-			expenseItemView.init(tripId);
-			
-			memberView.init(tripId);
-			
-			$(ENV.MAKE_METRIX).on('click', function(){
-		    	window.location.hash = '#trips/'+ENV.TRIP_ID+'/calculate';
+			this.displayView(tripId);
+		},
+		
+		displayView: function(tripId){
+
+		    template.RenderOne({
+		        target: "#body",
+		        tagName: "div",
+		        className: "trip-detail",
+		        id: "bodyTripDetail",
+		        position: "new",
+		        template: comm.getHtml("trip/view/trip-detail-template.html"),
+		        data: {},
+		        events: {
+		        },
+	
+		        afterRender: function() {
+					
+					expenseItemView.init(tripId);
+					
+					memberView.init(tripId);
+					
+					$(ENV.MAKE_METRIX).on('click', function(){
+				    	window.location.hash = '#trips/'+ENV.TRIP_ID+'/calculate';
+				    });
+		        }
 		    });
-				
 		}
 	};
 	
@@ -316,24 +355,7 @@ page.Trips = (function(){
 			if(!comm.initPage()){
 		    	return;
 		    }
-			
-			template.RenderOne({
-		        target: "#body",
-		        tagName: "div",
-		        className: "trip-detail",
-		        id: "bodyTripDetail",
-		        position: "new",
-		        template: comm.getHtml("trip/view/trips-template.html"),
-		        data: {},
-		        events: {
-		        },
-	
-		        afterRender: function() { 
-		        	tripsView.init();
-		        }
-		    });
-			
-//			window.location.hash = "#trips/20150927";
+			tripsView.init();
 		   
 		},
 		
@@ -342,21 +364,7 @@ page.Trips = (function(){
 			if(!comm.initPage()){
 		    	return;
 		    }
-		    template.RenderOne({
-		        target: "#body",
-		        tagName: "div",
-		        className: "trip-detail",
-		        id: "bodyTripDetail",
-		        position: "new",
-		        template: comm.getHtml("trip/view/trip-detail-template.html"),
-		        data: {},
-		        events: {
-		        },
-	
-		        afterRender: function() { 
-		        	tripDetailView.init(tripId);
-		        }
-		    });
+		    tripDetailView.init(tripId);
 		},
 		
 		getExpenseItems: expenseItemView.getItems(),

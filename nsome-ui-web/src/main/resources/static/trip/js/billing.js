@@ -11,8 +11,11 @@ page.Billing = (function(){
 	};
 	
 	var summaryView = {
-		init: function(tripId){
+		init: function(tripId, memberId){
 			this.getCalculate(tripId);
+			if(memberId !== undefined && memberId !== null){
+				$(ENV.SUMMARY_GRID_ID+' tbody>tr[id="'+memberId+'"]').trigger('click');
+			}
 		},
 		
 		getCalculate: function(tripId){
@@ -43,6 +46,8 @@ page.Billing = (function(){
 		        },
 	
 		        afterRender: function() {
+				    
+				    billsView.init();
 
 		        	$("#bodyTripDetailBilling tbody>tr").on('mouseover', function(e){
 		            	$(e.currentTarget).addClass('recode-active');
@@ -53,15 +58,12 @@ page.Billing = (function(){
 				    $(ENV.SUMMARY_GRID_ID+" tbody>tr").on('click', function(e){
 		            	$(ENV.SUMMARY_GRID_ID+" tbody>tr").removeClass('recode-selected');
 		            	$(e.currentTarget).addClass('recode-selected');
+		            	billsView.displayView($(this).attr('id'));
 				    });
 				    $(ENV.BILLING_GRID_ID+" tbody>tr").on('click', function(e){
 		            	$(ENV.BILLING_GRID_ID+" tbody>tr").removeClass('recode-selected');
 		            	$(e.currentTarget).addClass('recode-selected');
 				    });
-				    
-				    $(ENV.BILLING_SECT_ID).hide();
-				    $(ENV.BILLING_GRID_ID+' tr').hide();
-				    $(ENV.BILLING_GRID_ID+' [data-obj-member="1"]').show();
 				    
 				    comm.installGrid($(ENV.SUMMARY_GRID_ID));
 				    comm.installGrid($(ENV.BILLING_GRID_ID));
@@ -71,13 +73,35 @@ page.Billing = (function(){
 		}
 	};
 	
+	var billsView = {
+		init: function(){
+		    $(ENV.BILLING_SECT_ID).hide();
+		    $(ENV.BILLING_GRID_ID+' tbody>tr').hide();
+		    $(ENV.BILLING_GRID_ID+' tfoot>tr').hide();
+		},
+		
+		displayView: function(memberId){
+		    $(ENV.BILLING_GRID_ID+' tbody>tr').hide();
+		    $(ENV.BILLING_GRID_ID+' tfoot>tr').hide();
+
+		    $(ENV.BILLING_GRID_ID+' [data-obj-member="'+memberId+'"]').show();
+		    var memberName = $(ENV.SUMMARY_GRID_ID+' tbody>tr[id="'+memberId+'"]').attr('data-obj-name');
+		    var memberPayment = $(ENV.SUMMARY_GRID_ID+' tbody>tr[id="'+memberId+'"]').attr('data-obj-payment');
+		    var totalPayment = $(ENV.SUMMARY_GRID_ID+' tbody>tr[id="'+memberId+'"]').attr('data-obj-totalAmount');
+		    $(ENV.BILLING_GRID_ID+' [data-obj="member-name"]').text(memberName);
+		    $(ENV.BILLING_GRID_ID+' [data-obj="member-payment"]').text(memberPayment);
+		    $(ENV.BILLING_GRID_ID+' [data-obj="member-totalAmount"]').text(totalPayment);
+
+		    $(ENV.BILLING_SECT_ID).show();
+		}
+	};
+	
 	return {
-		initPage : function(memberId){
+		initPage : function(tripId, memberId){
 //			if(!comm.initPage()){
 //		    	return;
 //		    }
-			summaryView.init(memberId);
-//			window.location.hash = "#trips/20150927";
+			summaryView.init(tripId, memberId);
 		   
 		}
 	};
