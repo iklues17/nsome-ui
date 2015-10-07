@@ -5,7 +5,9 @@ $(function(){
         	""				: page.Trips.initPage,
         	"trips"			: page.Trips.initPage,
         	"trips/:tripId"	: page.Trips.initDetailPage,
-        	"trips/:tripId/metrix"	: function(){}
+        	"trips/:tripId/calculate"	: page.Calculator.initPage,
+        	"trips/:tripId/calculate/billing": page.Billing.initPage,
+        	"trips/:tripId/calculate/billing/:memberId": page.Billing.initPage
             
         },
 

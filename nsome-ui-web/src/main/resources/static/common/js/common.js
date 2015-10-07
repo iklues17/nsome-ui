@@ -200,5 +200,6 @@ comm.installGrid = function($target){
 			value = value.substring(0,value.length-1);
 		}
 		$(this).text(comm.addComma(value));
+		$(this).attr('style', 'text-align:right;');
 	});
 }
